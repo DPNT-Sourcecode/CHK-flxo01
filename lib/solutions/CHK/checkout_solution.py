@@ -51,7 +51,7 @@ SPECIAL_OFFER_DIFF_ITEMS = {
 }
 
 GROUP_SPECIAL_OFFER = {
-    ('Z', 'S', 'T', 'Y', 'X'): {3: 45}
+    ('X', 'S', 'T', 'Y', 'Z'): {3: 45}
 }
 
 
@@ -92,16 +92,28 @@ def get_price_no_grouped_discount(units, item, free_units_dict):
     return min(price_no_free, price_with_free)
 
 
-def get_grouped_special_count(sku_count):
-    grouped_special_count = {}
-    for special_group in GROUP_SPECIAL_OFFER:
-        # ('Z', 'S', 'T', 'Y', 'X')
-        for item in special_group:
-
-
-
-
-get_price_grouped_discount({'X': 10, 'T': 5})
+def get_grouped_special_price(sku_count, group=('X', 'S', 'T', 'Y', 'Z')):
+    group_count = dict([(i, sku_count[i]) for i in group])
+    total_units = sum(group_count.values())
+    total_price = 0
+    special_offer = GROUP_SPECIAL_OFFER.get(group, {})
+    special_numbers = sorted(special_offer.keys(), reverse=True)
+    # {3: 45}
+    for special_number in special_numbers:
+        rounded_items = floor(total_units / special_number)
+        total_price += rounded_items * special_offer[special_number]
+        total_units -= rounded_items * special_number
+    remain_units = 0
+    for i in group:
+        unit_price = UNIT_PRICE[i]
+        remain_units += group_count[i]
+        if remain_units < total_units:
+            total_price += remain_units * unit_price
+            total_units -= remain_units
+        else:
+            total_price += total_units * unit_price
+            break
+    return total_price
 
 
 def checkout(skus):
@@ -111,6 +123,10 @@ def checkout(skus):
             return -1
         else:
             sku_count[i] += 1
+    total_price = 0
+    for group in GROUP_SPECIAL_OFFER:
+        total_price +- 
     free_units_dict = get_free_items(sku_count)
     return sum([get_price_no_grouped_discount(units, item, free_units_dict) for item, units in sku_count.items()])
+
 
