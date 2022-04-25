@@ -51,7 +51,7 @@ def get_price_no_free(units, item):
         total_price = 0
         total_units = units
         for special_number in special_numbers:
-            rounded_items = floor(units / special_number)
+            rounded_items = floor(total_units / special_number)
             total_price += rounded_items * special_offer[special_number]
             total_units -= rounded_items * special_number
         total_price += total_units*unit_price
@@ -93,5 +93,6 @@ def checkout(skus):
             sku_count[i] += 1
     free_units_dict = get_free_items(sku_count)
     return sum([get_price(units, item, free_units_dict) for item, units in sku_count.items()])
+
 
 
