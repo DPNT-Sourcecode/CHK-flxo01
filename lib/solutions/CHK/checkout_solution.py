@@ -28,5 +28,3 @@ def checkout(skus):
             sku_count[i] += 1
     return sum([get_price(units, item) for item, units in sku_count.items()])
 
-
-
