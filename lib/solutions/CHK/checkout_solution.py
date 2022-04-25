@@ -44,11 +44,20 @@ SPECIAL_OFFER = {
     'V': {2: 90, 3: 130}
 }
 
-SPEICAL_OFFER_DIFF_ITEMS = {
+SPECIAL_OFFER_DIFF_ITEMS = {
     'E': {2: 'B'},
     'N': {3: 'M'},
     'R': {3: 'Q'}
 }
+
+
+def get_free_items(sku_count):
+    free_units_dict = dict([(i, 0) for i in UNIT_PRICE.keys()])
+    for item, offer in SPECIAL_OFFER_DIFF_ITEMS.items():
+        item_count = sku_count.get(item, 0)
+        for required_item, free_diff_item in offer.items():
+            free_units_dict[free_diff_item] += floor(item_count/required_item)
+    return free_units_dict
 
 
 def get_price_no_free(units, item):
@@ -79,13 +88,8 @@ def get_price(units, item, free_units_dict):
     return min(price_no_free, price_with_free)
 
 
-def get_free_items(sku_count):
-    e_count = sku_count['E']
-    return {'B': floor(e_count/2)}
-
-
 def checkout(skus):
-    sku_count = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0, 'F': 0}
+    sku_count = dict([(i, 0) for i in UNIT_PRICE.keys()])
     for i in skus:
         if i not in ['A', 'B', 'C', 'D', 'E', 'F']:
             return -1
@@ -93,6 +97,7 @@ def checkout(skus):
             sku_count[i] += 1
     free_units_dict = get_free_items(sku_count)
     return sum([get_price(units, item, free_units_dict) for item, units in sku_count.items()])
+
 
 
 
