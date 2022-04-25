@@ -5,7 +5,8 @@
 def hello(friend_name):
     if not isinstance(friend_name, str):
         raise TypeError("expect string as input only")
-    return "Hello, World!"
+    return f"Hello, {friend_name}!"
+
 
 
 
