@@ -24,7 +24,3 @@ class TestCheckout(TestCase):
         assert checkout_solution.checkout('EEEB') == 120
         assert checkout_solution.checkout('EEBBB') == 80 + 45
 
-
-
-
-
