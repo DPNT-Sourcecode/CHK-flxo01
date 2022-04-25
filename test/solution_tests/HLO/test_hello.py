@@ -8,4 +8,5 @@ class TestHello(TestCase):
             hello_solution.hello(1)
 
     def test_returns_message(self):
-        assert hello_solution.hello('world') == 'hello'
+        assert hello_solution.hello('world') == 'Hello, World!'
+
