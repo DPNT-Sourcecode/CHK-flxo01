@@ -43,10 +43,11 @@ class TestCheckout(TestCase):
         #
         # assert checkout_solution.checkout('PPP') == 50 * 3
         # assert checkout_solution.checkout('PPPPP') == 200
-        # 
+        #
         # assert checkout_solution.checkout('STX') == 45
         # assert checkout_solution.checkout('STZ') == 45
         assert checkout_solution.checkout('STZX') == 45 + 17
+
 
 
 
