@@ -1,4 +1,4 @@
-
+from math import floor
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -13,10 +13,18 @@ def get_price(units, item):
     elif item == 'D':
         return units * 15
     elif item == 'A':
-        rounded_items = units / 3
-        return rounded_items * 130 + (units - rounded_items*3)*50
+        rounded_items = floor(units / 3)
+        return rounded_items * 130 + (units - rounded_items * 3) * 50
+    elif item == 'B':
+        rounded_items = floor(units / 2)
+        return rounded_items * 45 + (units - rounded_items * 2) * 30
+
+def parse_sku(skus):
+    'AABBCCA'
+    return {}
 
 def checkout(skus):
+
 
 
 
