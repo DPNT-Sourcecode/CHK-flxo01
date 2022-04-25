@@ -59,7 +59,3 @@ class TestCheckout(TestCase):
         assert checkout_solution.checkout('STZRRRQAAAFFF') == 45 + 150 + 130 + 20
 
 
-
-
-
-
