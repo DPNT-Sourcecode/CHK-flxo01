@@ -94,6 +94,7 @@ def get_price_no_grouped_discount(units, item, free_units_dict):
 
 def get_grouped_special_price(sku_count, group=('X', 'S', 'T', 'Y', 'Z')):
     group_count = dict([(i, sku_count[i]) for i in group])
+
     total_units = sum(group_count.values())
     total_price = 0
     special_offer = GROUP_SPECIAL_OFFER.get(group, {})
@@ -125,8 +126,11 @@ def checkout(skus):
             sku_count[i] += 1
     total_price = 0
     for group in GROUP_SPECIAL_OFFER:
-        total_price +- 
+        total_price += get_grouped_special_price(sku_count, group)
+        for i in group:
+            sku_count.pop(i)
     free_units_dict = get_free_items(sku_count)
-    return sum([get_price_no_grouped_discount(units, item, free_units_dict) for item, units in sku_count.items()])
+    total_price += sum([get_price_no_grouped_discount(units, item, free_units_dict) for item, units in sku_count.items()])
+    return total_price
 
 
