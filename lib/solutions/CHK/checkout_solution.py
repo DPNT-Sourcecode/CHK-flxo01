@@ -50,6 +50,10 @@ SPECIAL_OFFER_DIFF_ITEMS = {
     'R': {3: 'Q'}
 }
 
+GROUP_SPECIAL_OFFER = {
+    ('S', 'T', 'X', 'Y', 'Z'): {3: 45}
+}
+
 
 def get_free_items(sku_count):
     free_units_dict = dict([(i, 0) for i in UNIT_PRICE.keys()])
@@ -97,4 +101,5 @@ def checkout(skus):
             sku_count[i] += 1
     free_units_dict = get_free_items(sku_count)
     return sum([get_price(units, item, free_units_dict) for item, units in sku_count.items()])
+
 
