@@ -46,7 +46,16 @@ class TestCheckout(TestCase):
         #
         # assert checkout_solution.checkout('STX') == 45
         # assert checkout_solution.checkout('STZ') == 45
-        assert checkout_solution.checkout('STZX') == 45 + 17
+        # assert checkout_solution.checkout('STZX') == 45 + 17
+        assert checkout_solution.checkout('STZXZZ') == 45 + 45
+        assert checkout_solution.checkout('STZXZZY') == 45 + 45 + 17
+        assert checkout_solution.checkout('STZXZZYT') == 45 + 45 + 17 + 20
+        assert checkout_solution.checkout('SSSXT') == 45 + 17 + 20
+        assert checkout_solution.checkout('STZRRR') == 45 + 150
+        assert checkout_solution.checkout('STZRRRQ') == 45 + 150
+        assert checkout_solution.checkout('STZRRRQAAA') == 45 + 150 + 130
+        assert checkout_solution.checkout('STZRRRQAAAAA') == 45 + 150 + 200
+
 
 
 
