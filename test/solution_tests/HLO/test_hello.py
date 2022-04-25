@@ -9,5 +9,3 @@ class TestHello(TestCase):
 
     def test_returns_message(self):
         assert hello_solution.hello('John') == 'Hello, John!'
-
-
