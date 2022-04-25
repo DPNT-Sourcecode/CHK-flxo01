@@ -17,7 +17,7 @@ def get_price_no_free(units, item):
     if not isinstance(units, int):
         raise TypeError('units must be int')
     unit_price = UNIT_PRICE[item]
-    if item in ['C', 'D', 'E', 'F']:
+    if item in ['C', 'D', 'E']:
         return unit_price * units
     elif item == 'A':
         rounded_5_items = floor(units / 5)
@@ -27,6 +27,9 @@ def get_price_no_free(units, item):
     elif item == 'B':
         rounded_items = floor(units / 2)
         return rounded_items * 45 + (units - rounded_items * 2) * unit_price
+    elif item == 'F':
+        rounded_items = floor(units / 3)
+        return rounded_items * 20 + (units - rounded_items * 3) * unit_price
 
 
 def get_price(units, item, free_units_dict):
@@ -54,6 +57,7 @@ def checkout(skus):
             sku_count[i] += 1
     free_units_dict = get_free_items(sku_count)
     return sum([get_price(units, item, free_units_dict) for item, units in sku_count.items()])
+
 
 
 
