@@ -23,6 +23,8 @@ def get_price_no_free(units, item):
 
 
 def get_price(units, item, free_units_dict):
+    if units == 0:
+        return 0
     free_units = free_units_dict.get(item, 0)
     price_no_free = get_price_no_free(units, item)
     if free_units == 0:
@@ -45,6 +47,7 @@ def checkout(skus):
             sku_count[i] += 1
     free_units_dict = get_free_items(sku_count)
     return sum([get_price(units, item, free_units_dict) for item, units in sku_count.items()])
+
 
 
 
