@@ -35,7 +35,13 @@ UNIT_PRICE = {
 SPECIAL_OFFER = {
     'A': {3: 130, 5: 200},
     'B': {2: 45},
-    'F': {3: 20}
+    'F': {3: 20},
+    'H': {5: 45, 10: 80},
+    'K': {2: 150},
+    'P': {5: 200},
+    'Q': {3: 80},
+    'U': {4: 120},
+    'V': {2: 90, 3: 130}
 }
 
 
@@ -44,28 +50,18 @@ def get_price_no_free(units, item):
         raise TypeError('units must be int')
     unit_price = UNIT_PRICE[item]
     special_offer = SPECIAL_OFFER.get(item, {})
-    if item in ['C', 'D', 'E']:
-        return unit_price * units
-    elif item in ['A', 'B', 'F']:
-        special_numbers = sorted(special_offer.keys(), reverse=True)
-        total_price = 0
-        total_units = units
-        for special_number in special_numbers:
-            rounded_items = floor(total_units / special_number)
-            total_price += rounded_items * special_offer[special_number]
-            total_units -= rounded_items * special_number
-        total_price += total_units*unit_price
-        return total_price
-        # rounded_5_items = floor(units / 5)
-        # rounded_3_items = floor((units - rounded_5_items * 5) / 3)
-        # return rounded_5_items * 200 + rounded_3_items * 130 + \
-        #        (units - rounded_5_items * 5 - rounded_3_items * 3) * unit_price
-    # elif item == 'B':
-    #     rounded_items = floor(units / 2)
-    #     return rounded_items * 45 + (units - rounded_items * 2) * unit_price
-    # elif item == 'F':
-    #     rounded_items = floor(units / 3)
-    #     return rounded_items * 20 + (units - rounded_items * 3) * unit_price
+    # if item in ['C', 'D', 'E']:
+    #     return unit_price * units
+    # elif item in ['A', 'B', 'F']:
+    special_numbers = sorted(special_offer.keys(), reverse=True)
+    total_price = 0
+    total_units = units
+    for special_number in special_numbers:
+        rounded_items = floor(total_units / special_number)
+        total_price += rounded_items * special_offer[special_number]
+        total_units -= rounded_items * special_number
+    total_price += total_units*unit_price
+    return total_price
 
 
 def get_price(units, item, free_units_dict):
@@ -93,6 +89,7 @@ def checkout(skus):
             sku_count[i] += 1
     free_units_dict = get_free_items(sku_count)
     return sum([get_price(units, item, free_units_dict) for item, units in sku_count.items()])
+
 
 
 
