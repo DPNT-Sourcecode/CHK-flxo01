@@ -132,4 +132,3 @@ def checkout(skus):
     free_units_dict = get_free_items(sku_count)
     total_price += sum([get_price_no_grouped_discount(units, item, free_units_dict) for item, units in sku_count.items()])
     return total_price
-
