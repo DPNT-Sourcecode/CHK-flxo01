@@ -5,7 +5,7 @@ from lib.solutions.CHK import checkout_solution
 class TestCheckout(TestCase):
     def test_checkout(self):
         assert checkout_solution.checkout('ABCD') == 115
-        assert checkout_solution.checkout('ABCDW') == -1
+        assert checkout_solution.checkout('ABCD1') == -1
         assert checkout_solution.checkout('123') == -1
         assert checkout_solution.checkout('abcd') == -1
         assert checkout_solution.checkout('AAA') == 130
@@ -29,6 +29,22 @@ class TestCheckout(TestCase):
         assert checkout_solution.checkout('FFFF') == 20 + 10
         assert checkout_solution.checkout('FFFFF') == 20 + 20
         assert checkout_solution.checkout('FFFFFF') == 20 + 20
+
+        assert checkout_solution.checkout('H') == 10
+        assert checkout_solution.checkout('HH') == 20
+        assert checkout_solution.checkout('HHHHH') == 45
+        assert checkout_solution.checkout('HHHHHH') == 45 + 10
+
+        assert checkout_solution.checkout('N') == 40
+        assert checkout_solution.checkout('NN') == 80
+        assert checkout_solution.checkout('NNN') == 120
+        assert checkout_solution.checkout('NNNM') == 120
+        assert checkout_solution.checkout('NNNMM') == 120 + 15
+
+        assert checkout_solution.checkout('PPP') == 50 * 3
+        assert checkout_solution.checkout('PPPPP') == 200
+
+
 
 
 

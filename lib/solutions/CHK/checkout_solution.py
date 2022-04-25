@@ -91,12 +91,13 @@ def get_price(units, item, free_units_dict):
 def checkout(skus):
     sku_count = dict([(i, 0) for i in UNIT_PRICE.keys()])
     for i in skus:
-        if i not in ['A', 'B', 'C', 'D', 'E', 'F']:
+        if i not in UNIT_PRICE.keys():
             return -1
         else:
             sku_count[i] += 1
     free_units_dict = get_free_items(sku_count)
     return sum([get_price(units, item, free_units_dict) for item, units in sku_count.items()])
+
 
 
 
