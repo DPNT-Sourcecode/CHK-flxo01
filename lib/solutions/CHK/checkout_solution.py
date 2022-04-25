@@ -98,9 +98,3 @@ def checkout(skus):
     free_units_dict = get_free_items(sku_count)
     return sum([get_price(units, item, free_units_dict) for item, units in sku_count.items()])
 
-
-
-
-
-
-

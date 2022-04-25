@@ -45,6 +45,3 @@ class TestCheckout(TestCase):
         assert checkout_solution.checkout('PPPPP') == 200
 
 
-
-
-
