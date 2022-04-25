@@ -30,6 +30,3 @@ class TestCheckout(TestCase):
         assert checkout_solution.checkout('FFFFF') == 20 + 20
         assert checkout_solution.checkout('FFFFFF') == 20 + 20
 
-
-
-
