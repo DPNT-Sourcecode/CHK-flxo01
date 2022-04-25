@@ -7,5 +7,3 @@ def compute(x, y):
     if not (isinstance(x, int) and isinstance(y, int)):
         raise ValueError('inputs must be integer')
     return sum((x, y))
-
-

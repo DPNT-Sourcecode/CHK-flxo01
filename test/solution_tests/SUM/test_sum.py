@@ -18,6 +18,3 @@ class TestSum(TestCase):
     def test_raise_error_if_not_integer(self):
         with self.assertRaises(ValueError):
             sum_solution.compute(0.5, 10)
-
-
-
