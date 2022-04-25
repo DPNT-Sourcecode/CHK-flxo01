@@ -20,7 +20,9 @@ def get_price_no_free(units, item):
         return rounded_items * 45 + (units - rounded_items * 2) * 30
     elif item == 'E':
         return units * 40
-
+    elif item == 'F':
+        return units * 10
+    
 
 def get_price(units, item, free_units_dict):
     if units == 0:
@@ -35,16 +37,18 @@ def get_price(units, item, free_units_dict):
 
 def get_free_items(sku_count):
     e_count = sku_count['E']
-    return {'B': floor(e_count/2)}
+    f_count = sku_count['F']
+    return {'B': floor(e_count/2), 'F': floor(f_count/2)}
 
 
 def checkout(skus):
-    sku_count = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0}
+    sku_count = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0, 'F': 0}
     for i in skus:
-        if i not in ['A', 'B', 'C', 'D', 'E']:
+        if i not in ['A', 'B', 'C', 'D', 'E', 'F']:
             return -1
         else:
             sku_count[i] += 1
     free_units_dict = get_free_items(sku_count)
     return sum([get_price(units, item, free_units_dict) for item, units in sku_count.items()])
+
 
