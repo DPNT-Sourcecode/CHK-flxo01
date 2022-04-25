@@ -44,15 +44,19 @@ SPECIAL_OFFER = {
     'V': {2: 90, 3: 130}
 }
 
+SPEICAL_OFFER_DIFF_ITEMS = {
+    'E': {2: 'B'},
+    'N': {3: 'M'},
+    'R': {3: 'Q'}
+}
+
 
 def get_price_no_free(units, item):
     if not isinstance(units, int):
         raise TypeError('units must be int')
+
     unit_price = UNIT_PRICE[item]
     special_offer = SPECIAL_OFFER.get(item, {})
-    # if item in ['C', 'D', 'E']:
-    #     return unit_price * units
-    # elif item in ['A', 'B', 'F']:
     special_numbers = sorted(special_offer.keys(), reverse=True)
     total_price = 0
     total_units = units
@@ -89,6 +93,7 @@ def checkout(skus):
             sku_count[i] += 1
     free_units_dict = get_free_items(sku_count)
     return sum([get_price(units, item, free_units_dict) for item, units in sku_count.items()])
+
 
 
 
