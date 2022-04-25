@@ -42,8 +42,7 @@ def get_price(units, item, free_units_dict):
 
 def get_free_items(sku_count):
     e_count = sku_count['E']
-    f_count = sku_count['F']
-    return {'B': floor(e_count/2), 'F': floor(f_count/2)}
+    return {'B': floor(e_count/2)}
 
 
 def checkout(skus):
@@ -55,6 +54,7 @@ def checkout(skus):
             sku_count[i] += 1
     free_units_dict = get_free_items(sku_count)
     return sum([get_price(units, item, free_units_dict) for item, units in sku_count.items()])
+
 
 
 
